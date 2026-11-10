@@ -1,0 +1,1124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA | Computer World</title>
+
+<!-- ================= CSS START ================= -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap');
+
+:root {
+    --bg: #080d1c;
+    --card: #111b32;
+    --text: #f4f7ff;
+    --muted: #a8b4d0;
+    --primary: #00e5ff;
+    --secondary: #a855f7;
+    --pink: #ff4ecd;
+    --border: rgba(255,255,255,0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #172b53 0, transparent 35%),
+        radial-gradient(circle at 90% 30%, #30164e 0, transparent 30%),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    transition: 0.4s;
+}
+
+body.light {
+    --bg: #eef4ff;
+    --card: #ffffff;
+    --text: #14213d;
+    --muted: #53627e;
+    --border: rgba(20,33,61,0.15);
+    background: #eef4ff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 7%;
+    background: rgba(8,13,28,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+}
+
+body.light .navbar {
+    background: rgba(238,244,255,0.9);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    background: linear-gradient(90deg,var(--primary),var(--secondary),var(--pink));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.menu-btn {
+    display: none;
+}
+
+.hero {
+    min-height: 650px;
+    padding: 90px 7%;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid rgba(0,229,255,0.4);
+    border-radius: 30px;
+    color: var(--primary);
+    background: rgba(0,229,255,0.08);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: clamp(42px,6vw,75px);
+    line-height: 1.1;
+    margin: 25px 0;
+    font-weight: 800;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg,#00e5ff,#a855f7,#ff4ecd);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 580px;
+    font-size: 16px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 23px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    color: #07101c;
+    background: linear-gradient(90deg,#00e5ff,#6e9cff);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.2);
+}
+
+.btn-outline {
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: var(--card);
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,229,255,0.2);
+}
+
+.processor {
+    width: min(350px,80%);
+    aspect-ratio: 1;
+    margin: auto;
+    border-radius: 35px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background: linear-gradient(145deg,#162d55,#15102e);
+    border: 2px solid rgba(0,229,255,0.5);
+    box-shadow: 0 0 60px rgba(0,229,255,0.2),
+                inset 0 0 50px rgba(168,85,247,0.15);
+    animation: float 4s ease-in-out infinite;
+}
+
+.chip {
+    width: 55%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 25px;
+    font-size: 70px;
+    background: linear-gradient(135deg,#00e5ff,#a855f7);
+    box-shadow: 0 0 50px rgba(0,229,255,0.5);
+}
+
+.processor::before,
+.processor::after {
+    content: "";
+    position: absolute;
+    inset: -22px;
+    border: 1px solid rgba(0,229,255,0.4);
+    border-radius: 45px;
+    animation: rotate 12s linear infinite;
+}
+
+.processor::after {
+    inset: -42px;
+    border-color: rgba(168,85,247,0.4);
+    animation-direction: reverse;
+}
+
+@keyframes float {
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+section {
+    padding: 85px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+
+.section-heading h2 {
+    font-size: clamp(30px,4vw,45px);
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+}
+
+.stat-card {
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.stat-card h3 {
+    color: var(--primary);
+    font-size: 32px;
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.card {
+    background: linear-gradient(145deg,var(--card),rgba(80,50,120,0.15));
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    transition: 0.35s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 35px rgba(0,229,255,0.12);
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    font-size: 28px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg,rgba(0,229,255,0.2),rgba(168,85,247,0.25));
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.operation-flow {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.flow-item {
+    text-align: center;
+    padding: 28px 15px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--card);
+}
+
+.flow-item span {
+    display: block;
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.flow-item h3 {
+    color: var(--primary);
+}
+
+.flow-item p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: auto;
+    border-left: 2px solid var(--primary);
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -39px;
+    top: 25px;
+    width: 14px;
+    height: 14px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.timeline-item h3 {
+    color: var(--primary);
+}
+
+.timeline-item p {
+    color: var(--muted);
+}
+
+.quiz-box {
+    max-width: 750px;
+    margin: auto;
+    padding: 35px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+.quiz-box h3 {
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+    transition: 0.2s;
+}
+
+.option:hover {
+    border-color: var(--primary);
+    background: rgba(0,229,255,0.08);
+}
+
+.option.correct {
+    background: rgba(34,197,94,0.2);
+    border-color: #22c55e;
+}
+
+.option.wrong {
+    background: rgba(239,68,68,0.2);
+    border-color: #ef4444;
+}
+
+#quiz-result {
+    margin-top: 20px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.faq {
+    margin-bottom: 13px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 19px;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 19px 19px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.faq.active .faq-answer {
+    display: block;
+}
+
+.cta {
+    text-align: center;
+    background: linear-gradient(120deg,#102d50,#30154e,#17244a);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 60px 25px;
+}
+
+.cta h2 {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: #c2cbe0;
+    margin-bottom: 25px;
+}
+
+footer {
+    padding: 35px 7%;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+#topBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #06101d;
+    font-size: 20px;
+    display: none;
+    z-index: 500;
+}
+
+@media(max-width:900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero p {
+        margin: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        flex-direction: column;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: inline-block;
+    }
+
+    .grid,
+    .operation-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 65px;
+    }
+
+    section {
+        padding: 65px 6%;
+    }
+
+    .quiz-box {
+        padding: 22px;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
+<!-- ================= CSS END ================= -->
+
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+    <a href="#" class="logo">NEXORA.</a>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#technology">Technology</a>
+        <a href="#history">History</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" title="Change Theme">☀</button>
+        <button class="icon-btn menu-btn" id="menuBtn">☰</button>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<main>
+<section class="hero" id="home">
+    <div>
+        <span class="tag">WELCOME TO THE DIGITAL WORLD</span>
+
+        <h1>
+            Explore The
+            <span class="gradient-text">Computer</span>
+            Universe
+        </h1>
+
+        <p>
+            Discover the amazing world of computers, technology,
+            artificial intelligence, hardware, software and the
+            digital innovations that are shaping our future.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">Explore More →</a>
+            <a href="#quiz" class="btn btn-outline">Take a Quiz</a>
+        </div>
+    </div>
+
+    <div class="processor">
+        <div class="chip">💻</div>
+    </div>
+</section>
+
+<!-- STATISTICS -->
+<section id="about">
+    <div class="section-heading">
+        <span class="tag">COMPUTER OVERVIEW</span>
+        <h2>Technology at a Glance</h2>
+        <p>Computers help us learn, create, communicate and solve problems.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>1940s</h3>
+            <p>Early Electronic Computers</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>24/7</h3>
+            <p>Digital Connectivity</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>AI</h3>
+            <p>Intelligent Technology</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>∞</h3>
+            <p>Possibilities of Computing</p>
+        </div>
+    </div>
+</section>
+
+<!-- COMPUTER BASICS -->
+<section>
+    <div class="section-heading">
+        <span class="tag">COMPUTER BASICS</span>
+        <h2>What is a Computer?</h2>
+        <p>A computer is an electronic device that processes data and produces useful information.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-icon">⌨️</div>
+            <h3>Input</h3>
+            <p>Input devices help us enter data into a computer. Examples include keyboard, mouse and scanner.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Processing</h3>
+            <p>The CPU processes instructions and performs calculations to turn data into useful information.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🖥️</div>
+            <h3>Output</h3>
+            <p>Output devices display the results. Examples include monitor, printer and speakers.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💾</div>
+            <h3>Storage</h3>
+            <p>Storage devices save information for future use, such as SSDs, hard drives and memory cards.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧩</div>
+            <h3>Hardware</h3>
+            <p>Hardware refers to the physical parts of a computer that we can see and touch.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💿</div>
+            <h3>Software</h3>
+            <p>Software is a collection of programs and instructions that tell a computer what to do.</p>
+        </div>
+    </div>
+</section>
+
+<!-- WORKING PROCESS -->
+<section>
+    <div class="section-heading">
+        <span class="tag">HOW IT WORKS</span>
+        <h2>The Computer Working Cycle</h2>
+        <p>A computer follows four major stages to complete a task.</p>
+    </div>
+
+    <div class="operation-flow">
+        <div class="flow-item">
+            <span>📥</span>
+            <h3>Input</h3>
+            <p>Enter data</p>
+        </div>
+
+        <div class="flow-item">
+            <span>🧠</span>
+            <h3>Process</h3>
+            <p>Process data</p>
+        </div>
+
+        <div class="flow-item">
+            <span>📤</span>
+            <h3>Output</h3>
+            <p>Show results</p>
+        </div>
+
+        <div class="flow-item">
+            <span>💽</span>
+            <h3>Storage</h3>
+            <p>Save information</p>
+        </div>
+    </div>
+</section>
+
+<!-- MODERN TECHNOLOGY -->
+<section id="technology">
+    <div class="section-heading">
+        <span class="tag">MODERN INNOVATION</span>
+        <h2>Explore Modern Technology</h2>
+        <p>Discover some of the technologies changing the world.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-icon">🤖</div>
+            <h3>Artificial Intelligence</h3>
+            <p>AI allows computers to perform tasks that normally require human intelligence, such as recognising patterns and understanding language.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>Cloud Computing</h3>
+            <p>Cloud computing lets people store data and use computing services through the internet.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Cyber Security</h3>
+            <p>Cyber security protects computers, networks and information from digital threats.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Internet of Things</h3>
+            <p>IoT connects everyday devices to the internet so they can exchange information.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🥽</div>
+            <h3>Virtual Reality</h3>
+            <p>VR creates computer-generated environments that users can explore interactively.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3>Future Computing</h3>
+            <p>New computing technologies continue to improve speed, communication and problem-solving.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history">
+    <div class="section-heading">
+        <span class="tag">A JOURNEY THROUGH TIME</span>
+        <h2>History of Computers</h2>
+        <p>From early calculating machines to modern intelligent systems.</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>1800s — Early Ideas</h3>
+            <p>Charles Babbage designed the Analytical Engine, an important early concept in computing.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>1940s — Electronic Computers</h3>
+            <p>Large electronic computers were developed for complex calculations.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>1970s — Microprocessors</h3>
+            <p>Microprocessors helped make computers smaller and more accessible.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>1990s — Internet Era</h3>
+            <p>The World Wide Web helped connect people and information around the world.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Today — AI Era</h3>
+            <p>Artificial intelligence, cloud computing and smart devices are transforming technology.</p>
+        </div>
+    </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+    <div class="section-heading">
+        <span class="tag">TEST YOUR KNOWLEDGE</span>
+        <h2>Computer Knowledge Quiz</h2>
+        <p>Answer these questions and see how much you know about computers.</p>
+    </div>
+
+    <div class="quiz-box">
+        <p id="question-count">Question 1 of 5</p>
+        <h3 id="question">What is the brain of a computer?</h3>
+
+        <div id="options"></div>
+
+        <p id="quiz-result"></p>
+        <button class="btn btn-primary" id="nextBtn" style="margin-top:15px">
+            Next Question →
+        </button>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section>
+    <div class="section-heading">
+        <span class="tag">HAVE QUESTIONS?</span>
+        <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-container">
+        <div class="faq">
+            <button class="faq-question">
+                What is a computer? <span>＋</span>
+            </button>
+            <div class="faq-answer">
+                A computer is an electronic device that accepts data, processes it and provides information.
+            </div>
+        </div>
+
+        <div class="faq">
+            <button class="faq-question">
+                What is the full form of CPU? <span>＋</span>
+            </button>
+            <div class="faq-answer">
+                CPU stands for Central Processing Unit.
+            </div>
+        </div>
+
+        <div class="faq">
+            <button class="faq-question">
+                What is an operating system? <span>＋</span>
+            </button>
+            <div class="faq-answer">
+                An operating system is system software that manages computer hardware and software resources.
+            </div>
+        </div>
+
+        <div class="faq">
+            <button class="faq-question">
+                What is the difference between hardware and software? <span>＋</span>
+            </button>
+            <div class="faq-answer">
+                Hardware means the physical parts of a computer. Software means the programs and instructions that run on it.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="cta">
+        <span class="tag">KEEP EXPLORING</span>
+        <h2>Technology Is The Future</h2>
+        <p>Keep learning, keep creating and discover something new every day.</p>
+        <a href="#home" class="btn btn-primary">Back to Home ↑</a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <a href="#" class="logo">NEXORA.</a>
+    <p>© 2026 NEXORA. Educational Computer Website.</p>
+    <p>Designed with HTML, CSS & JavaScript.</p>
+</footer>
+
+<button id="topBtn" title="Back to top">↑</button>
+
+<!-- ================= JAVASCRIPT START ================= -->
+<script>
+/* MOBILE MENU */
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", function() {
+    navLinks.classList.toggle("show");
+});
+
+document.querySelectorAll(".nav-links a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        navLinks.classList.remove("show");
+    });
+});
+
+/* DARK AND LIGHT THEME */
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", function() {
+    document.body.classList.toggle("light");
+
+    if(document.body.classList.contains("light")) {
+        themeBtn.textContent = "🌙";
+    } else {
+        themeBtn.textContent = "☀";
+    }
+});
+
+/* BACK TO TOP BUTTON */
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", function() {
+    if(window.scrollY > 400) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+});
+
+topBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+/* FAQ ACCORDION */
+document.querySelectorAll(".faq-question").forEach(function(button) {
+    button.addEventListener("click", function() {
+        const currentFAQ = button.parentElement;
+        currentFAQ.classList.toggle("active");
+
+        const symbol = button.querySelector("span");
+
+        if(currentFAQ.classList.contains("active")) {
+            symbol.textContent = "−";
+        } else {
+            symbol.textContent = "＋";
+        }
+    });
+});
+
+/* COMPUTER QUIZ */
+const questions = [
+    {
+        question: "What is the brain of a computer?",
+        options: ["Monitor", "CPU", "Keyboard", "Mouse"],
+        answer: 1
+    },
+    {
+        question: "Which device is used to type text?",
+        options: ["Printer", "Speaker", "Keyboard", "Monitor"],
+        answer: 2
+    },
+    {
+        question: "What does RAM stand for?",
+        options: [
+            "Read Access Memory",
+            "Random Access Memory",
+            "Run All Memory",
+            "Rapid Action Machine"
+        ],
+        answer: 1
+    },
+    {
+        question: "Which one is an operating system?",
+        options: ["Windows", "Google", "HTML", "Keyboard"],
+        answer: 0
+    },
+    {
+        question: "Which part stores data permanently?",
+        options: ["RAM", "Cache", "SSD", "Register"],
+        answer: 2
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const resultElement = document.getElementById("quiz-result");
+const countElement = document.getElementById("question-count");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion() {
+    answered = false;
+
+    const q = questions[currentQuestion];
+
+    questionElement.textContent = q.question;
+    countElement.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+    resultElement.textContent = "";
+    nextBtn.textContent =
+        currentQuestion === questions.length - 1
+        ? "See My Result"
+        : "Next Question →";
+
+    optionsElement.innerHTML = "";
+
+    q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+
+        button.className = "option";
+        button.textContent = option;
+
+        button.addEventListener("click", function() {
+            checkAnswer(index, button);
+        });
+
+        optionsElement.appendChild(button);
+    });
+}
+
+function checkAnswer(selected, selectedButton) {
+    if(answered) return;
+
+    answered = true;
+
+    const correct = questions[currentQuestion].answer;
+    const allOptions = document.querySelectorAll(".option");
+
+    if(selected === correct) {
+        score++;
+        resultElement.textContent = "✓ Correct Answer!";
+        selectedButton.classList.add("correct");
+    } else {
+        resultElement.textContent =
+            "✗ Incorrect! Correct answer: " +
+            questions[currentQuestion].options[correct];
+
+        selectedButton.classList.add("wrong");
+        allOptions[correct].classList.add("correct");
+    }
+}
+
+function showResult() {
+    questionElement.textContent = "Quiz Completed!";
+    countElement.textContent = "Your Final Result";
+
+    optionsElement.innerHTML = "";
+    resultElement.textContent =
+        "You scored " + score + " out of " + questions.length + "!";
+
+    nextBtn.textContent = "Play Again";
+    currentQuestion = questions.length;
+}
+
+nextBtn.addEventListener("click", function() {
+    if(currentQuestion === questions.length) {
+        currentQuestion = 0;
+        score = 0;
+        loadQuestion();
+        return;
+    }
+
+    if(!answered) {
+        resultElement.textContent = "Please select an answer first!";
+        return;
+    }
+
+    currentQuestion++;
+
+    if(currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+});
+
+/* START QUIZ */
+loadQuestion();
+
+</script>
+<!-- ================= JAVASCRIPT END ================= -->
+
+</body>
+</html>
